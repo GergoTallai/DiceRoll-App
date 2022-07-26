@@ -10,3 +10,20 @@ Játék szabályok:
 - Az a játékos nyer, aki előbb eléri a 100 pontot.  
 
 */
+
+var pontszamok, korPontszam, aktivJatekos, kocka;
+
+pontszamok = [0,0];
+korPontszam = 0;
+aktivJatekos = 0;
+kocka = Math.ceil(Math.random()*6);
+
+//DOM Manipuláció
+document.querySelector('#current-' + aktivJatekos).textContent = kocka;
+//HTML módosítás, formázással
+//document.querySelector('#current-' + aktivJatekos).innerHTML =  '<u>' + kocka + '</u>';
+
+//#-el érjük el az ID, .-tal a class-t)
+//Betöltésnél ne látszódjon
+document.querySelector('.dice').style.display = 'none';
+
