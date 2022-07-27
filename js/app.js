@@ -28,12 +28,26 @@ init();
 document.querySelector('.btn-roll').addEventListener('click', function(){
   if (jatekFolyamatban){
     // Véletlen szám generálása
-    var kocka = Math.ceil(Math.random()*6);
+    var kocka1 = Math.ceil(Math.random()*6);
+    var kocka2 = Math.ceil(Math.random()*6);
     //Eredmény megjelenítése
-    var kockaDOM = document.querySelector('.dice');
-    kockaDOM.style.display = 'block';
-    kockaDOM.src = 'img/dice-' + kocka + '.png';
+    
+    document.getElementById('dice-1').src = 'img/dice-' + kocka1 + '.png';
+    document.getElementById('dice-2').src = 'img/dice-' + kocka2 + '.png';
 
+    kockaKiBe('be');
+
+    if (kocka1 !== 1 && kocka2 !== 1) {
+      //Körben elért pontszám ha nme egyet dobunk
+      korPontszam += kocka1 + kocka2;
+      document.querySelector('#current-' + aktivJatekos).textContent = korPontszam;
+
+    } else {
+      kovetkezoJatekos();
+      //document.querySelector('.dice').style.display= 'none';
+
+    }
+    /*
     if (kocka === 6 && elozoDobas === 6){
       //Elveszíti az összes pontot
       pontszamok[aktivJatekos] = 0;
@@ -51,6 +65,7 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
 
     }
     elozoDobas = kocka;
+    */
   };
 });
 
@@ -65,7 +80,7 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
     var elerendoPontszam = document.querySelector('.celPontszam').value;
     //isNaN megvizsgálja hogy szám
     if (!elerendoPontszam || isNaN(elerendoPontszam)) {
-      elerendoPontszam = 15;
+      elerendoPontszam = 30;
     }
 
     //100 pont elérése esetén Alert: nyert
@@ -105,7 +120,7 @@ function init(){
 
   //#-el érjük el az ID, .-tal a class-t)
   //Betöltésnél ne látszódjon
-  document.querySelector('.dice').style.display = 'none';
+  kockaKiBe('ki');
 
   document.getElementById('score-0').textContent ='0';
   document.getElementById('current-0').textContent ='0';
@@ -120,3 +135,14 @@ function init(){
   document.querySelector('.player-1-panel').classList.remove('active');
   document.querySelector('.player-0-panel').classList.add('active');
 };
+
+function kockaKiBe(funkcio) {
+  //funkcio = ki vag be
+  if(funkcio === 'ki'){
+    document.getElementById('dice-1').style.display = 'none';
+    document.getElementById('dice-2').style.display = 'none';
+  } else if (funkcio === 'be') {
+    document.getElementById('dice-1').style.display = 'block';
+    document.getElementById('dice-2').style.display = 'block';
+  }
+}
