@@ -62,8 +62,14 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
 
     document.querySelector('#score-' + aktivJatekos).textContent = pontszamok[aktivJatekos];
 
+    var elerendoPontszam = document.querySelector('.celPontszam').value;
+    //isNaN megvizsgálja hogy szám
+    if (!elerendoPontszam || isNaN(elerendoPontszam)) {
+      elerendoPontszam = 15;
+    }
+
     //100 pont elérése esetén Alert: nyert
-    if(pontszamok[aktivJatekos] >= 100) {
+    if(pontszamok[aktivJatekos] >= elerendoPontszam) {
       jatekFolyamatban = false;
       document.querySelector('#name-' + aktivJatekos).textContent = 'GYŐZTES!';
       document.querySelector('.player-' + aktivJatekos + '-panel').classList.add('winner');
