@@ -42,7 +42,7 @@ body {
 .player-1-panel {
     width: 50%;
     float: left;
-    height: 600px;
+    height: 700px;
     padding: 100px;
 }
 
@@ -169,5 +169,18 @@ i {
     text-align: center;
     padding: 10px;
     width: 160px;
+    text-transform: uppercase;
+}
+.ruleText {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); 
+    top: 600px;
+    color: #555;
+    font-size: 13px;
+    font-family: 'Lato';
+    text-align: center;
+    padding: 10px;
+    width: 750px;
     text-transform: uppercase;
 }
