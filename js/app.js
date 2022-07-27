@@ -8,10 +8,12 @@ Játék szabályok:
 - A játékos választhatja a 'Megtartom' gombot is. Ebben az esetben az adott körben elért pontok száma, hozzáadódik a játékos összes
   pontszámához. Majd a dobás joga a másik játékosra száll.
 - Az a játékos nyer, aki előbb eléri a 100 pontot.  
-
+- 2*6 esetén és átkerül a másikhoz
+- 2db kocka legyen
+- Állítható legyen a cél
 */
 
-var pontszamok, korPontszam, aktivJatekos, jatekFolyamatban;
+var pontszamok, korPontszam, aktivJatekos, jatekFolyamatban, elozoDobas;
 
 init();
 
@@ -31,14 +33,24 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
     var kockaDOM = document.querySelector('.dice');
     kockaDOM.style.display = 'block';
     kockaDOM.src = 'img/dice-' + kocka + '.png';
-    //Körben elért pontszám ha nme egyet dobunk
-    if (kocka !== 1) {
+
+    if (kocka === 6 && elozoDobas === 6){
+      //Elveszíti az összes pontot
+      pontszamok[aktivJatekos] = 0;
+      document.querySelector('#score-' + aktivJatekos).textContent = 0;
+      kovetkezoJatekos();
+
+    } else if (kocka !== 1) {
+      //Körben elért pontszám ha nme egyet dobunk
       korPontszam += kocka;
       document.querySelector('#current-' + aktivJatekos).textContent = korPontszam;
+
     } else {
       kovetkezoJatekos();
       //document.querySelector('.dice').style.display= 'none';
+
     }
+    elozoDobas = kocka;
   };
 });
 
@@ -82,6 +94,7 @@ function init(){
   pontszamok = [0,0];
   aktivJatekos = 0;
   korPontszam = 0;
+  elozoDobas = 0;
   jatekFolyamatban = true;
 
   //#-el érjük el az ID, .-tal a class-t)
